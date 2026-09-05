@@ -1,0 +1,84 @@
+[2026-03-18T02:12:00Z] terraform apply executed
+
+data.aws_caller_identity.current: Reading...
+aws_cloudfront_origin_access_control.portfolio: Refreshing state... [id=EYZ2P0IMGPAK0]
+data.aws_caller_identity.current: Read complete after 0s [id=703671902584]
+aws_s3_bucket.portfolio: Refreshing state... [id=portfolio-dmi-website-703671902584]
+aws_s3_bucket_public_access_block.portfolio: Refreshing state... [id=portfolio-dmi-website-703671902584]
+aws_s3_bucket_versioning.portfolio: Refreshing state... [id=portfolio-dmi-website-703671902584]
+aws_cloudfront_distribution.portfolio: Refreshing state... [id=E2ODAQNC794VIM]
+aws_s3_bucket_policy.portfolio_cloudfront: Refreshing state... [id=portfolio-dmi-website-703671902584]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_cloudfront_distribution.portfolio will be updated in-place
+  ~ resource "aws_cloudfront_distribution" "portfolio" {
+        id                              = "E2ODAQNC794VIM"
+      ~ price_class                     = "PriceClass_200" -> "PriceClass_100"
+        tags                            = {
+            "Environment" = "production"
+            "Project"     = "portfolio-dmi"
+        }
+        # (21 unchanged attributes hidden)
+
+        # (5 unchanged blocks hidden)
+    }
+
+  # aws_s3_bucket_policy.portfolio_cloudfront will be updated in-place
+  ~ resource "aws_s3_bucket_policy" "portfolio_cloudfront" {
+        id     = "portfolio-dmi-website-703671902584"
+      ~ policy = jsonencode(
+          ~ {
+              ~ Statement = [
+                  ~ {
+                      + Condition = {
+                          + StringEquals = {
+                              + "aws:SourceArn" = "arn:aws:cloudfront::703671902584:distribution/E2ODAQNC794VIM"
+                            }
+                        }
+                      ~ Sid       = "AllowCloudFront" -> "AllowCloudFrontOACAccess"
+                        # (4 unchanged attributes hidden)
+                    },
+                ]
+                # (1 unchanged attribute hidden)
+            }
+        )
+        # (1 unchanged attribute hidden)
+    }
+
+Plan: 0 to add, 2 to change, 0 to destroy.
+aws_cloudfront_distribution.portfolio: Modifying... [id=E2ODAQNC794VIM]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 00m10s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 00m20s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 00m30s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 00m40s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 00m50s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 01m00s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 01m10s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 01m20s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 01m30s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 01m40s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 01m50s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 02m00s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 02m10s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 02m20s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 02m30s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 02m40s elapsed]
+aws_cloudfront_distribution.portfolio: Still modifying... [id=E2ODAQNC794VIM, 02m50s elapsed]
+aws_cloudfront_distribution.portfolio: Modifications complete after 3m21s [id=E2ODAQNC794VIM]
+aws_s3_bucket_policy.portfolio_cloudfront: Modifying... [id=portfolio-dmi-website-703671902584]
+aws_s3_bucket_policy.portfolio_cloudfront: Modifications complete after 2s [id=portfolio-dmi-website-703671902584]
+
+Apply complete! Resources: 0 added, 2 changed, 0 destroyed.
+
+Outputs:
+
+cloudfront_distribution_id = "E2ODAQNC794VIM"
+cloudfront_domain_name = "ds68rb5vg8kl2.cloudfront.net"
+s3_bucket_arn = "arn:aws:s3:::portfolio-dmi-website-703671902584"
+s3_bucket_name = "portfolio-dmi-website-703671902584"
+website_url = "https://ds68rb5vg8kl2.cloudfront.net"
